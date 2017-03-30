@@ -1,7 +1,24 @@
 var http = require('http');
 var request = require('request');
 var cheerio = require('cheerio');
+
+var SomeAnnoncePortal = require('./impl/portal-base/SomeAnnoncePortal.js');
+
+
 ////////////////////////////////////////////////////////////////////////
+
+var portal = new SomeAnnoncePortal.SomeAnnoncePortal("annonce");
+
+var handler = function(items) { console.log(items); };
+portal.query("chleba", handler);
+
+
+/*
+
+
+
+
+
 
 var errorHandler = function(error) {
 	console.log('ERROR: ' + error);
@@ -43,7 +60,7 @@ var handler =
 request.get(url, handler);
 //	.on('response', handler)
 //	.on('error', errorHandler);
-
+*/
 
 ////////////////////////////////////////////////////////////////////////
 
