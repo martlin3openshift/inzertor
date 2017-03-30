@@ -51,7 +51,7 @@ SomeAnnoncePortal.prototype.parseItem = function($item) {
 	var title = $title.html();
 	var url = $link.attr('href');
 	
-	return { title: title, url: url };
+	return { title: title, url: url, portal: this.name };
 }
 
 SomeAnnoncePortal.prototype.createQuery = function(keyword) {

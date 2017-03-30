@@ -2,12 +2,12 @@ var http = require('http');
 var request = require('request');
 var cheerio = require('cheerio');
 
-var SomeAnnoncePortal = require('./impl/portal-base/SomeAnnoncePortal.js');
+var AnnoncePortal = require('./impl/portal-impls/AnnoncePortal.js');
 
 
 ////////////////////////////////////////////////////////////////////////
 
-var portal = new SomeAnnoncePortal.SomeAnnoncePortal("annonce");
+var portal = new AnnoncePortal.AnnoncePortal();
 
 var handler = function(items) { console.log(items); };
 portal.query("chleba", handler);
@@ -76,13 +76,13 @@ request('http://www.google.com', function (error, response, body) {
 
 
 
-
+/*
 var server = http.createServer(function(req, res) {
   res.writeHead(200);
   res.end('Hello Http');
 });
 server.listen(8080);
-
+*/
 console.log('Done.');
 
 
