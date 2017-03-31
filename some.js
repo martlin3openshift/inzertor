@@ -1,33 +1,40 @@
 var http = require('http');
 var request = require('request');
 var cheerio = require('cheerio');
+var url = require("url");
 
 var AnnoncePortal = require('./impl/portal-impls/AnnoncePortal.js');
 var ServerContentSupplier = require('./impl/server/ServerContentSupplier.js');
 
 
 ////////////////////////////////////////////////////////////////////////
-var supl = new ServerContentSupplier.ServerContentSupplier();
 var handler = function(response) {
 	console.log(response);
 };
+var supl = new ServerContentSupplier.ServerContentSupplier(handler);
 
-supl.renderHTMLTemplate('form', {}, handler);
-supl.renderHTMLTemplate('XXXform', {}, handler);
-
-console.log("-------------------");
-
-supl.supplyStaticResource('css/styles.css', 'text/css', handler);
-supl.supplyStaticResource('css/XXXstyles.css', 'text/css', handler);
-
-console.log("-------------------");
-
-supl.supply('/resource/css/styles.css', {}, handler);
-supl.supply('/form', {}, handler);
+var processor = function(id, url, processHandler) {
+	console.log("PROCESSING: " +  id);
+	processHandler(id, null, { title: "[some data]" });
+}
+var processors = {'form': processor };
+supl.renderHTMLTemplate(url.parse('/form'), processors);
+supl.renderHTMLTemplate(url.parse('/form/input	'), processors);
+supl.renderHTMLTemplate(url.parse('/XXXform'), processors);
 
 console.log("-------------------");
 
-supl.supply('/resource/server.js', {}, handler);
+supl.supplyStaticResource(url.parse('/css/styles.css'));
+supl.supplyStaticResource(url.parse('/css/XXXstyles.css'));
+
+console.log("-------------------");
+
+//supl.supply('/resource/css/styles.css', {}, handler);
+//supl.supply('/form', {}, handler);
+
+console.log("-------------------");
+
+supl.supplyStaticResource(url.parse('/resource/server.js'));
 
 
 /*
