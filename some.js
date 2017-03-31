@@ -3,16 +3,40 @@ var request = require('request');
 var cheerio = require('cheerio');
 
 var AnnoncePortal = require('./impl/portal-impls/AnnoncePortal.js');
+var ServerContentSupplier = require('./impl/server/ServerContentSupplier.js');
 
 
 ////////////////////////////////////////////////////////////////////////
+var supl = new ServerContentSupplier.ServerContentSupplier();
+var handler = function(response) {
+	console.log(response);
+};
+
+supl.renderHTMLTemplate('form', {}, handler);
+supl.renderHTMLTemplate('XXXform', {}, handler);
+
+console.log("-------------------");
+
+supl.supplyStaticResource('css/styles.css', 'text/css', handler);
+supl.supplyStaticResource('css/XXXstyles.css', 'text/css', handler);
+
+console.log("-------------------");
+
+supl.supply('/resource/css/styles.css', {}, handler);
+supl.supply('/form', {}, handler);
+
+console.log("-------------------");
+
+supl.supply('/resource/server.js', {}, handler);
+
+
+/*
 
 var portal = new AnnoncePortal.AnnoncePortal();
 
 var handler = function(items) { console.log(items); };
 portal.query("chleba", handler);
-
-
+*/
 /*
 
 

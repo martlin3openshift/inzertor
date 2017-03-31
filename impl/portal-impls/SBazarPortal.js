@@ -46,8 +46,11 @@ SBazarPortal.prototype.selectorOfCost = function() {
 
 SBazarPortal.prototype.inferImage = function($item) { 
 	var $image = this.select$Image($item);
-	if (!$image || $image.length == 0) return null;	//XXX ?
 	
 	var path = $image.attr('data-origin');
-	return path;
+	if (path) {
+		return path;
+	} else {
+		return null;
+	}
 }
