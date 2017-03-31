@@ -8,7 +8,7 @@ var AvizoPortal = function() {
 		CommonPortal.CommonPortal.PATH_NEEDLE); //
 }
 
-AvizoPortal.prototype = CommonPortal.CommonPortal.prototype;
+AvizoPortal.prototype = new CommonPortal.CommonPortal();
 module.exports.AvizoPortal = AvizoPortal;
 
 ////////////////////////////////////////////////////////////////////////////////

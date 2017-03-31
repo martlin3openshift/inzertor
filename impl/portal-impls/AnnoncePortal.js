@@ -8,13 +8,13 @@ var AnnoncePortal = function() {
 		"http://www.anonce.cz" + CommonPortal.CommonPortal.PATH_NEEDLE); //
 }
 
-AnnoncePortal.prototype = CommonPortal.CommonPortal.prototype;
+AnnoncePortal.prototype = new CommonPortal.CommonPortal();
 module.exports.AnnoncePortal = AnnoncePortal;
 
 ////////////////////////////////////////////////////////////////////////////////
 
 AnnoncePortal.prototype.selectorOfItems = function() {
-	return '.box.q.ext-item';
+	return 'div.box.q.ext-item';
 }
 AnnoncePortal.prototype.selectorOfTitle = function() {
 	return 'h2 a';

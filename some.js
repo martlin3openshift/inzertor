@@ -3,11 +3,32 @@ var request = require('request');
 var cheerio = require('cheerio');
 var url = require("url");
 
-//var AnnoncePortal = require('./impl/portal-impls/AnnoncePortal.js');
-var MicroServerExecutor = require('./impl/server/MicroServerExecutor.js');
+var AnnoncePortal = require('./impl/portal-impls/AnnoncePortal.js');
+var AvizoPortal = require('./impl/portal-impls/AvizoPortal.js');
+var BazosPortal = require('./impl/portal-impls/BazosPortal.js');
+var SBazarPortal = require('./impl/portal-impls/SBazarPortal.js');
 
+//var MicroServerExecutor = require('./impl/base-server/MicroServerExecutor.js');
+var InzertorSearchEngineService = require('./impl/inzertor-service/InzertorSearchEngineService.js');
+var InzertorServer = require('./impl/inzertor-service/InzertorServer.js');
 
 ////////////////////////////////////////////////////////////////////////
+
+var server = new InzertorServer.InzertorServer();
+
+
+/*
+portals = InzertorSearchEngineService.InzertorSearchEngineService.ALL_PORTALS;
+var service = new InzertorSearchEngineService.InzertorSearchEngineService(portals);
+var handler = function(items) {
+	console.log("COUNT: " + items.length);
+	console.log(items);
+}
+
+service.query("iphone", handler);
+*/
+
+/*
 var handler = function(response) {
 	console.log(response);
 };
@@ -69,7 +90,7 @@ supl.execute(url3);
 supl.execute(url4);
 supl.execute(url5);
 
-
+*/
 
 
 /*
@@ -98,17 +119,18 @@ supl.supplyStaticResource(url.parse('/resource/server.js'));
 
 */
 /*
+console.log("-------------------");
 
 var portal = new AnnoncePortal.AnnoncePortal();
 
+console.log("portal: " + portal.name + ", " + portal.selectorOfItems());
+
 var handler = function(items) { console.log(items); };
-portal.query("chleba", handler);
+portal.query("samsung", handler);
+
+console.log("-------------------");
 */
 /*
-
-
-
-
 
 
 var errorHandler = function(error) {

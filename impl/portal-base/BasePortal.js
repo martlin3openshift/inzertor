@@ -29,7 +29,7 @@ BasePortal.prototype.query = function(keyword, resultHandler) {
 BasePortal.prototype.createHandler = function(resultHandler) {
 	var portal = this;
 	return function(error, response, body) {
-		//TODO check status code
+		//TODO handle error
 		var $ = cheerio.load(body);
 		var $items = portal.findItems($);
 

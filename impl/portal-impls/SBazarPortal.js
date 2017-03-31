@@ -8,7 +8,7 @@ var SBazarPortal = function() {
 		"https://www.sbazar.cz" + CommonPortal.CommonPortal.PATH_NEEDLE); //
 }
 
-SBazarPortal.prototype = CommonPortal.CommonPortal.prototype;
+SBazarPortal.prototype = new CommonPortal.CommonPortal();
 module.exports.SBazarPortal = SBazarPortal;
 
 ////////////////////////////////////////////////////////////////////////////////

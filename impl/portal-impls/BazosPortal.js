@@ -8,7 +8,7 @@ var BazosPortal = function() {
 		CommonPortal.CommonPortal.PATH_NEEDLE); //
 }
 
-BazosPortal.prototype = CommonPortal.CommonPortal.prototype;
+BazosPortal.prototype = new CommonPortal.CommonPortal();
 module.exports.BazosPortal = BazosPortal;
 
 ////////////////////////////////////////////////////////////////////////////////
