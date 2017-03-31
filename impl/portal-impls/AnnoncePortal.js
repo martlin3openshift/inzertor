@@ -35,7 +35,7 @@ AnnoncePortal.prototype.selectorOfDate = function() {
 	return 'div.ad-date';
 }
 AnnoncePortal.prototype.selectorOfPlace = function() {
-	return 'div.data table.attrs td[colspan="2"]';
+	return 'div.data table.attrs td[colspan="2"] a';
 }
 AnnoncePortal.prototype.selectorOfCost = function() {
 	return 'div.data strong.mini-sticker span';

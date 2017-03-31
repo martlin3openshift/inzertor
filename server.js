@@ -2,7 +2,10 @@ var http = require('http');
 var url = require("url");
 var moment = require('moment');
 
-var AnnoncePortal = require('./impl/portal-impls/AnnoncePortal.js');
+//var AnnoncePortal = require('./impl/portal-impls/AnnoncePortal.js');
+//var BazosPortal = require('./impl/portal-impls/BazosPortal.js');
+//var AvizoPortal = require('./impl/portal-impls/AvizoPortal.js');
+var SBazarPortal = require('./impl/portal-impls/SBazarPortal.js');
 
 
 function inferPath(req) {
@@ -19,7 +22,11 @@ function inferQueryKeyword(req) {
 }
 
 function doTheQuery(keyword, responseHandler) {
-	var portal = new AnnoncePortal.AnnoncePortal();
+	var portal = new SBazarPortal.SBazarPortal();
+	//new AvizoPortal.AvizoPortal();
+	//new BazosPortal.BazosPortal();
+	//new AnnoncePortal.AnnoncePortal();
+	
 	var result = [];
 	var handler = function(items) {
 		result = result.concat(items);

@@ -85,13 +85,13 @@ CommonPortal.prototype.inferDate = function($item) {
 CommonPortal.prototype.inferPlace = function($item) { 
 	var $place = this.select$Place($item);
 	if (!$place) return null;
-	
+
 	return $place.html();
 }
 CommonPortal.prototype.inferCost = function($item) { 	
 	var $cost = this.select$Cost($item);
 	if (!$cost) return null;
-	
+
 	return $cost.html();
 }
 
