@@ -3,16 +3,76 @@ var request = require('request');
 var cheerio = require('cheerio');
 var url = require("url");
 
-var AnnoncePortal = require('./impl/portal-impls/AnnoncePortal.js');
-var ServerContentSupplier = require('./impl/server/ServerContentSupplier.js');
+//var AnnoncePortal = require('./impl/portal-impls/AnnoncePortal.js');
+var MicroServerExecutor = require('./impl/server/MicroServerExecutor.js');
 
 
 ////////////////////////////////////////////////////////////////////////
 var handler = function(response) {
 	console.log(response);
 };
-var supl = new ServerContentSupplier.ServerContentSupplier(handler);
+var staticPathsRegex = /^\/resources\/(.+)$/;
+var dynamicPathsRegex = /^\/(form)(\/.*)?$/;
+var isStatic = function(url) {
+	var path = url.pathname;
+	return path.indexOf("/resources/") == 0;
+}
+var isDynamic = function(url) {
+	var path = url.pathname;
+	return path.indexOf("/form") == 0
+		|| path.indexOf("/result") == 0;
+}
+var urlToStaticPath = function(url) {
+	return "./" + url.pathname.replace("/resources/", "");
+};
+var urlToDynamicId = function(url) {
+	return url.pathname.replace(/^\/([^\/]+)(\/.*)?$/, "$1");
+};
+idToDynamicTemplate = function(id) {
+	return "./templates/" + id + ".ejs";
+};
+var processor = function(url, id,processHandler) {
+	console.log("PROCESSING: " +  id);
+	processHandler(id, "text/html", null, { title: "[some data]" });
+};
+var processors = {'form': processor };
+var supl = new MicroServerExecutor.MicroServerExecutor(isStatic, isDynamic, urlToStaticPath, urlToDynamicId, idToDynamicTemplate, processors, handler);
 
+var url1 = url.parse("/form");
+var url2 = url.parse("/XXXform");
+var url3 = url.parse("/resources/css/styles.css");
+var url4 = url.parse("/resources/server.js");
+var url5 = url.parse("/foo/bar/baz");
+
+console.log(!!supl.isStatic(url1));
+console.log(!!supl.isStatic(url3));
+console.log(!!supl.isDynamic(url1));
+console.log(!!supl.isDynamic(url3));
+
+console.log("-------------------");
+
+supl.executeStatic(url1);
+supl.executeStatic(url3);
+supl.executeStatic(url4);
+
+console.log("-------------------");
+
+supl.executeDynamic(url1);
+supl.executeDynamic(url2);
+supl.executeDynamic(url3);
+
+console.log("-------------------");
+
+supl.execute(url1);
+supl.execute(url2);
+supl.execute(url3);
+supl.execute(url4);
+supl.execute(url5);
+
+
+
+
+/*
 var processor = function(id, url, processHandler) {
 	console.log("PROCESSING: " +  id);
 	processHandler(id, null, { title: "[some data]" });
@@ -36,7 +96,7 @@ console.log("-------------------");
 
 supl.supplyStaticResource(url.parse('/resource/server.js'));
 
-
+*/
 /*
 
 var portal = new AnnoncePortal.AnnoncePortal();
