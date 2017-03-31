@@ -14,7 +14,7 @@ module.exports.BasePortal = BasePortal;
 ////////////////////////////////////////////////////////////////////////////////
 
 BasePortal.prototype.query = function(keyword, resultHandler) {
-	console.log("Searching: " + keyword);
+	//console.log("Searching: " + keyword);
 	var query = this.createQuery(keyword);
 	
 	var handler = this.createHandler(resultHandler); 

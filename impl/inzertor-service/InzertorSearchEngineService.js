@@ -20,11 +20,12 @@ module.exports.InzertorSearchEngineService = InzertorSearchEngineService;
 ////////////////////////////////////////////////////////////////////////////////
 
 InzertorSearchEngineService.prototype.query = function(keyword, itemsHandler) {
+	console.log("Querying:: " + keyword);
 	var result = [];
 	var remainingPortals = this.portals.length;
 	
 	for (i = 0; i < this.portals.length; i++) {
-		var portal = portals[i];
+		var portal = this.portals[i];
 		
 		var portalHandler = function(items) {
 			remainingPortals--;

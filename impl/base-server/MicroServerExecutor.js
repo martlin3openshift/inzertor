@@ -93,7 +93,6 @@ MicroServerExecutor.prototype.renderTemplate = function(id, type, data) {
 		return true;
 	};
 	
-	console.log("??" + template);
 	return ejs.renderFile(template, data, options, renderHandler);
 }
 
