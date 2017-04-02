@@ -1,5 +1,6 @@
 
 var url = require("url");
+var querystring = require('querystring');
 
 
 var InzertorSearchEngineService = require('../inzertor-service/InzertorSearchEngineService.js');
@@ -11,7 +12,7 @@ InzertorServer = function() {
 }
 
 module.exports.InzertorServer = InzertorServer;
-
+InzertorServer.MAIN_PAGE_NAME = "hledej";
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -34,8 +35,7 @@ InzertorServer.prototype.createExecutor = function(req, res) {
 
 	var isDynamic = function(url) {
 		var path = url.pathname;
-		return path.indexOf("/form") == 0
-			|| path.indexOf("/result") == 0;
+		return path.indexOf("/" + InzertorServer.MAIN_PAGE_NAME) == 0;
 	};
 
 	var urlToStaticPath = function(url) {
@@ -68,7 +68,7 @@ InzertorServer.prototype.createExecutor = function(req, res) {
 		}
 	};
 
-	var processors = {'form': processor };
+	var processors = {'hledej': processor };
 	
 	var responseHandler = function(response) {
 		res.writeHead(response.status, {"Content-Type": response.type});
@@ -82,8 +82,7 @@ InzertorServer.prototype.createExecutor = function(req, res) {
 ////////////////////////////////////////////////////////////////////////
 
 InzertorServer.prototype.parseParams = function(url) {
-	//TODO if no keyword specified
-	var keyword = url.pathname.replace(/\/([^\/]+)\/(.+)/, "$2");
+	var keyword = querystring.unescape(url.pathname.replace("/" + InzertorServer.MAIN_PAGE_NAME + "\/", ""));
 	var portals = InzertorSearchEngineService.InzertorSearchEngineService.ALL_PORTALS;	//TODO
 
 	return {keyword: keyword, portals: portals};

@@ -1,0 +1,57 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Inzertor</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/resources/css/styles.css">
+		<script type="text/javascript" src="/resources/js/scripts.js"></script>
+	</head>
+	<body>
+		<h1>Inzertor!</h1>
+		
+		<form action="form" method="GET" onsubmit="return query();">
+			<input type="search" value="" name="keyword" id="keyword">
+			<input type="submit" value="Vyhledat!">
+		</form>
+		
+		<hr>
+		
+		<% if (keyword) { %>
+			<h2>Výsledky hledání pro dotaz "<%= keyword %>"</h2>
+		
+			<% if (items.length == 0) { %>
+				<div>
+					Pro dotaz <%- keyword %> nebylo nic nalezeno.
+				</div>
+				
+			<% } else { %>			
+				<ul>
+					<% items.forEach(function(item){ %>
+						<li>
+							<h3><a href="<%- item.url %>" target="_blank"><%- item.title %></a></h3>
+						
+							<img src="<%- item.image ? item.image : '/resources/image/no-image.png' %>" alt="preview">
+							<div>
+								<span><%- item.portal %></span>,
+								<span><%- item.type ? item.type : "Typ inzerátu nespecifikován" %></span>,
+								<span><%- item.date ? item.date : "Datum inzerátu neuvedeno" %></span>,
+								<span><%- item.place ? item.place : "Místo neuvedeno" %></span>,
+								<span><%- item.cost ? item.cost : "Cena neuvedena" %></span>,
+							</div>
+						
+							<p>
+								<%- item.desc ? item.desc : "Žádný popis" %>
+							</p>
+						</li>
+					<% }); %>	
+				</ul>
+				
+			<% } %>
+		<% } else { %>
+			<div>
+				Inzertor.
+			</div>
+		<% } %>
+	</body>
+</html>
+		
