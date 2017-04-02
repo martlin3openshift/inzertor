@@ -46,7 +46,7 @@ CommonPortal.prototype.inferTitle = function($item) {
 	var $title = this.select$Title($item);
 	if (!$title || $title.lenght == 0) throw new Error("Missing title");
 	
-	return $title.html();
+	return $title.text();
 }
 CommonPortal.prototype.inferUrl = function($item) {
 	var $link = this.select$Link($item);
@@ -66,7 +66,7 @@ CommonPortal.prototype.inferType = function($item) {
 	var $type = this.select$Type($item);
 	if (!$type || $type.lenght == 0) return null;
 	
-	return $type.html();
+	return $type.text();
 
 }
 CommonPortal.prototype.inferDesc = function($item) { 
@@ -79,20 +79,20 @@ CommonPortal.prototype.inferDate = function($item) {
 	var $date = this.select$Date($item);
 	if (!$date || $date.lenght == 0) return null;
 	
-	var str = $date.html();
+	var str = $date.text();
 	return this.parseDate(str);	
 }
 CommonPortal.prototype.inferPlace = function($item) { 
 	var $place = this.select$Place($item);
 	if (!$place) return null;
 
-	return $place.html();
+	return $place.text();
 }
 CommonPortal.prototype.inferCost = function($item) { 	
 	var $cost = this.select$Cost($item);
 	if (!$cost) return null;
 
-	return $cost.html();
+	return $cost.text();
 }
 
 
@@ -153,7 +153,7 @@ CommonPortal.prototype.selectorOfCost = function() { throw new Exception("Implem
 // misc
 
 CommonPortal.prototype.createQueryURL = function(keyword) {
-	//TODO url encoding
+	//TODO url encoding ?
 	return this.queryUrlPattern.replace(CommonPortal.KEYWORD_NEEDLE, keyword);
 }
 

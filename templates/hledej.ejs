@@ -7,34 +7,36 @@
 		<script type="text/javascript" src="/resources/js/scripts.js"></script>
 	</head>
 	<body>
-		<h1>Inzertor!</h1>
+		<header>
+			<h1 id="title">Inzertor!</h1>
 		
-		<form action="form" method="GET" onsubmit="return query();">
-			<input type="search" value="" name="keyword" id="keyword">
-			<input type="submit" value="Vyhledat!">
-		</form>
-		
-		<hr>
+			<form action="form" method="GET" onsubmit="return query();" id="search-form">
+				<input type="search" value="<%- keyword ? keyword : '' %>" name="keyword" id="keyword">
+				<input type="submit" value="Vyhledat!">
+			</form>
+		</header>
+
 		
 		<% if (keyword) { %>
-			<h2>Výsledky hledání pro dotaz "<%= keyword %>"</h2>
+			<!--<h2>Výsledky hledání pro dotaz "<%= keyword %>"</h2>-->
 		
 			<% if (items.length == 0) { %>
-				<div>
+				<div class="panel">
 					Pro dotaz <%- keyword %> nebylo nic nalezeno.
 				</div>
 				
 			<% } else { %>			
-				<ul>
+				<ul class="results">
 					<% items.forEach(function(item){ %>
-						<li>
+						<li class="result-item">
+							<img src="<%- item.image ? item.image : '/resources/image/no-image.png' %>" alt="preview">
+						
 							<h3><a href="<%- item.url %>" target="_blank"><%- item.title %></a></h3>
 						
-							<img src="<%- item.image ? item.image : '/resources/image/no-image.png' %>" alt="preview">
 							<div>
 								<span><%- item.portal %></span>,
 								<span><%- item.type ? item.type : "Typ inzerátu nespecifikován" %></span>,
-								<span><%- item.date ? item.date : "Datum inzerátu neuvedeno" %></span>,
+								<span><%- item.date ? item.date.toString() : "Datum inzerátu neuvedeno" %></span>,
 								<span><%- item.place ? item.place : "Místo neuvedeno" %></span>,
 								<span><%- item.cost ? item.cost : "Cena neuvedena" %></span>,
 							</div>
@@ -42,14 +44,15 @@
 							<p>
 								<%- item.desc ? item.desc : "Žádný popis" %>
 							</p>
+							<span class="float-clean"></span>
 						</li>
 					<% }); %>	
 				</ul>
 				
 			<% } %>
 		<% } else { %>
-			<div>
-				Inzertor.
+			<div class="panel">
+				Inzertor, nezávislý vyledávač inzercí. A tak.
 			</div>
 		<% } %>
 	</body>

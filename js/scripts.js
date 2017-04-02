@@ -3,7 +3,7 @@ function query() {
 	var input = document.getElementById("keyword");
 	var value = input.value;
 
-	location.href = "/form/" + value;
+	location.href = "/hledej/" + value;
 
 	return false;
 }
