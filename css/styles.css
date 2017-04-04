@@ -1,3 +1,8 @@
+/*
+ * colors: white (background), #fff (button FG), #F8F8F8 (panels BG), #F0F0F0 (hovered panels BG), #A0A0A0 (borders), #404040 (font),
+ * #935a71 (light purple), #4b2185 (dark purple)
+**/
+
 
 /* common */
 
@@ -44,11 +49,11 @@ html, body {
 	width: 35%;
 	
 	float: left;
-	
 }
 
 #search-form input {
 	display: inline-block;
+	vertical-align: bottom;
 }
 
 #search-form input[type=search] {
@@ -56,21 +61,37 @@ html, body {
 	padding: 0.25eM;
 
 	height: 1.5eM;
-	max-width: 79%;
+	max-width: 75%;
 	
-	border: 1px solid gray;
+	border-radius: 4px;
+	border: 1px solid #935a71;
 }
+
+#search-form input[type=search]:focus {
+	border: 2px solid #4b2185;
+}
+
 
 #search-form input[type=submit] {
 	font-size: 100%;
 	padding: 1eM 4%;
+
 	
 	height: 3eM;
 	min-width: 20%;
 
 	font-weight: bold;
-	background-color: lightblue;
 	border: none;
+	
+	/* https://dabuttonfactory.com */
+	color:         #fff;
+	background:    #935a71;
+	background:    -webkit-linear-gradient(#935a71, #4b2185);
+	background:    linear-gradient(#935a71, #4b2185);
+	border-radius: 2px;
+	display:       inline-block;
+	text-align:    center;
+	text-shadow:   1px 1px 0 #000;
 }
 
 #login-panel {
@@ -80,7 +101,7 @@ html, body {
 
 #login-panel a {
 	font-weight: bold;
-	color: #3F48CC;
+	color: #4b2185;
 	margin: 0 5;
 }
 /******************************************************************************/
@@ -92,6 +113,7 @@ main {
 
 .panel {
 	background-color: #F8F8F8;
+	font-size: 120%;
 	
 	padding: 2eM 5%;
 	margin: 2eM 4%;
@@ -173,5 +195,67 @@ main {
 }
 
 /******************************************************************************/
+/* popups */ 
+.popup {
+	display: none;
+	background-color: #F0F0F0;
+	border: 2px solid #4b2185;
+	padding: 2eM 4%;
+	position: absolute;
+	top: 9eM;
+	left: 30%;
+	width: 40%;
+	
+	/* http://www.cssmatic.com/border-radius */ 
+	border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+	-webkit-border-radius: 10px 10px 10px 10px;
+	
+	/* http://www.cssmatic.com/box-shadow */
+	-webkit-box-shadow: 20px 20px 80px 14px rgba(0,0,0,0.75);
+	-moz-box-shadow: 20px 20px 80px 14px rgba(0,0,0,0.75);
+	box-shadow: 20px 20px 80px 14px rgba(0,0,0,0.75);
+}
 
-/* TODO */
+.popup-shown {
+ 	display: block;
+}
+
+
+/******************************************************************************/
+/* forms */ 
+
+.fieldset input,label {
+	padding: 0.5eM 2%;
+	margin: 0.2eM 4%;
+	min-width: 20%;
+	
+	display: block;
+	float: left;
+}
+
+.fieldset label {
+	clear: both;
+}
+
+.fieldset input[type=text],input[type=password] { 	/* TODO all types */
+	padding: 0.5eM 2%;
+
+	border-radius: 4px;
+	border: 1px solid #935a71;
+}
+
+.fieldset input[type=submit],input[type=reset],input[type=button] {
+	padding: 0.5eM 2%;	
+	border: none;
+	color:         #fff;
+	background:    #935a71;
+	background:    -webkit-linear-gradient(#935a71, #4b2185);
+	background:    linear-gradient(#935a71, #4b2185);
+	border-radius: 2px;
+	display:       inline-block;
+	text-align:    center;
+	text-shadow:   1px 1px 0 #000;
+}
+
+

@@ -12,16 +12,19 @@
 					<img src="/resources/image/logo.svg" alt="Inzertor" id="logo-image">
 			</header>
 		
-			<form action="form" method="GET" onsubmit="return query();" id="search-form">
+			<form action="form" method="GET" onsubmit="query(); return false" id="search-form">
 				<input type="search" value="<%- keyword ? keyword : '' %>" name="keyword" id="keyword">
 				<input type="submit" value="Hledej">
 			</form>
 			
 			<div id="login-panel">
-				<!-- TODO if logged ... -->
-				<a href="#">Přihlášení</a>
-				<a href="#">Registrace</a>
-				
+				<% if (login.login) { %>
+					<span><%= login.login %></span>
+					<a href="/odhlaseni">Odhlásit</a>					
+				<% } else { %>
+					<a href="#" onclick="showLogin(); return false">Přihlášení</a>
+					<a href="#" onclick="showRegister(); return false">Registrace</a>
+				<% } %>
 			</div>
 		</section>
 
@@ -76,6 +79,73 @@
 			</div>
 		<% } %>
 		</main>
+		
+		
+		<% if (login.hasOwnProperty("loginSucessful")) { %>
+			<% if (login.loginSucessful) { %>
+				<div class="popup" id="login-successfull-popup">
+					Přihlášení proběhlo úspěšně.
+					<input type="reset" value="Zavřít" onclick="hidePopup(); return true;">
+				</div>
+				<script>showPopup("login-successfull-popup");</script>
+			<% } else { %>
+				<div class="popup" id="login-unsuccessfull-popup">
+					Přihlášení se nezdařilo, zkontrolujte si zadané údaje.
+					<input type="reset" value="Zavřít" onclick="hidePopup(); return true;">
+				</div>
+				<script>showPopup("login-unsuccessfull-popup");</script>
+			<% } %>
+		<% } %>
+		
+		<% if (login.hasOwnProperty("registerSucessful")) { %>
+			<% if (login.registerSucessful) { %>
+				<div class="popup" id="register-successfull-popup">
+					Registrace proběhla úspěšně!
+					<input type="reset" value="Zavřít" onclick="hidePopup(); return true;">
+				</div>
+				<script>showPopup("register-successfull-popup");</script>
+			<% } else { %>
+				<div class="popup" id="register-unsuccessfull-popup">
+					Registrace se nezdařila. :-(
+					<input type="reset" value="Zavřít" onclick="hidePopup(); return true;">
+				</div>
+				<script>showPopup("register-unsuccessfull-popup");</script>
+			<% } %>
+		<% } %>
+		
+		<div class="popup" id="login-popup">
+			<form action="/prihlaseni" method="POST" class="fieldset">
+				<label>uživatelské jméno</label>
+				<input type="text" name="login">
+
+				<label>heslo</label>
+				<input type="password" name="password">
+
+				<label></label>
+				<input type="submit" value="Přihlásit">
+				<input type="reset" value="Zavřít" onclick="hidePopup(); return true;">
+			</form>
+		</div>
+		
+		<div class="popup" id="register-popup">
+			<form action="/registrace" method="POST" class="fieldset">
+				<label>uživatelské jméno</label>
+				<input type="text" name="login">
+				
+				<label>e-mail</label>
+				<input type="text" name="email">
+
+				<label>heslo</label>
+				<input type="password" name="password">
+
+				<label>heslo znovu</label>
+				<input type="password" name="password-confirm">
+
+				<label></label>
+				<input type="submit" value="Registrovat">
+				<input type="reset" value="Zavřít" onclick="hidePopup(); return true;">
+			</form>
+		</div>
 	</body>
 </html>
 		
