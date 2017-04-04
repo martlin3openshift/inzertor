@@ -46,7 +46,7 @@ CommonPortal.prototype.inferTitle = function($item) {
 	var $title = this.select$Title($item);
 	if (!$title || $title.lenght == 0) throw new Error("Missing title");
 	
-	return $title.text();
+	return $title.text().trim();
 }
 CommonPortal.prototype.inferUrl = function($item) {
 	var $link = this.select$Link($item);
@@ -66,33 +66,33 @@ CommonPortal.prototype.inferType = function($item) {
 	var $type = this.select$Type($item);
 	if (!$type || $type.lenght == 0) return null;
 	
-	return $type.text();
+	return $type.text().trim();
 
 }
 CommonPortal.prototype.inferDesc = function($item) { 
 	var $desc = this.select$Desc($item);
 	if (!$desc) return null;
 	
-	return $desc.html();
+	return this.removeHTML($desc.text().trim());
 }
 CommonPortal.prototype.inferDate = function($item) { 
 	var $date = this.select$Date($item);
 	if (!$date || $date.lenght == 0) return null;
 	
-	var str = $date.text();
+	var str = $date.text().trim();
 	return this.parseDate(str);	
 }
 CommonPortal.prototype.inferPlace = function($item) { 
 	var $place = this.select$Place($item);
 	if (!$place) return null;
 
-	return $place.text();
+	return $place.text().trim();
 }
 CommonPortal.prototype.inferCost = function($item) { 	
 	var $cost = this.select$Cost($item);
 	if (!$cost) return null;
 
-	return $cost.text();
+	return $cost.text().trim();
 }
 
 
@@ -173,4 +173,8 @@ CommonPortal.prototype.applySelector = function($target, selector) {
 	} else  {
 		return $target.find(selector);
 	}
+}
+
+CommonPortal.prototype.removeHTML = function(text) {
+	return text.replace(/\<[^\>]+\>/, "");
 }

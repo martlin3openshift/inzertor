@@ -83,7 +83,7 @@ InzertorServer.prototype.createExecutor = function(req, res) {
 
 InzertorServer.prototype.parseParams = function(url) {
 	var query = url.pathname.replace("/" + InzertorServer.MAIN_PAGE_NAME, "");
-	if (query.indexOf("/" == 0) {
+	if (query.indexOf("/" == 0)) {
 		query = query.substr(1);
 	}
 	var keyword = querystring.unescape(query);
