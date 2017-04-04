@@ -7,16 +7,25 @@
 		<script type="text/javascript" src="/resources/js/scripts.js"></script>
 	</head>
 	<body>
-		<header>
-			<h1 id="title">Inzertor!</h1>
+		<section id="header-row">
+			<header id="logo-header">
+					<img src="/resources/image/logo.svg" alt="Inzertor" id="logo-image">
+			</header>
 		
 			<form action="form" method="GET" onsubmit="return query();" id="search-form">
 				<input type="search" value="<%- keyword ? keyword : '' %>" name="keyword" id="keyword">
-				<input type="submit" value="Vyhledat!">
+				<input type="submit" value="Hledej">
 			</form>
-		</header>
+			
+			<div id="login-panel">
+				<!-- TODO if logged ... -->
+				<a href="#">Přihlášení</a>
+				<a href="#">Registrace</a>
+				
+			</div>
+		</section>
 
-		
+		<main>
 		<% if (keyword) { %>
 			<!--<h2>Výsledky hledání pro dotaz "<%= keyword %>"</h2>-->
 		
@@ -25,25 +34,35 @@
 					Pro dotaz <%- keyword %> nebylo nic nalezeno.
 				</div>
 				
-			<% } else { %>			
-				<ul class="results">
+			<% } else { %>
+				<div id="order-by-panel">
+					<label>Seřadit podle:</label>
+					<select name="order-by">
+						<option value="nejnižší ceny">nejnižší ceny</option>
+						<option value="nejvyšší ceny">nejvyšší ceny</option>
+					<select>
+				</div>			
+				<ul id="results">
 					<% items.forEach(function(item){ %>
 						<li class="result-item">
-							<img src="<%- item.image ? item.image : '/resources/image/no-image.png' %>" alt="preview">
+							<a href="<%- item.url %>" target="_blank">
+								<div class="item-image-part">
+									<img src="<%- item.image ? item.image : '/resources/image/no-image.png' %>" alt="preview" class="result-item-image">
+									<span class="result-item-portal"><%- item.portal %></span>
+								</div>
+							
+								<h3><%- item.title %></h3>
+								<div>
+									<span><%- item.type ? item.type : "Typ inzerátu nespecifikován" %></span>,
+									<span><%- item.date ? item.date.toString() : "Datum inzerátu neuvedeno" %></span>,
+									<span><%- item.place ? item.place : "Místo neuvedeno" %></span>,
+									<span><%- item.cost ? item.cost : "Cena neuvedena" %></span>,
+								</div>
 						
-							<h3><a href="<%- item.url %>" target="_blank"><%- item.title %></a></h3>
-						
-							<div>
-								<span><%- item.portal %></span>,
-								<span><%- item.type ? item.type : "Typ inzerátu nespecifikován" %></span>,
-								<span><%- item.date ? item.date.toString() : "Datum inzerátu neuvedeno" %></span>,
-								<span><%- item.place ? item.place : "Místo neuvedeno" %></span>,
-								<span><%- item.cost ? item.cost : "Cena neuvedena" %></span>,
-							</div>
-						
-							<p>
-								<%- item.desc ? item.desc : "Žádný popis" %>
-							</p>
+								<p>
+									<%- item.desc ? item.desc : "Žádný popis" %>
+								</p>
+							</a>
 							<span class="float-clean"></span>
 						</li>
 					<% }); %>	
@@ -55,6 +74,7 @@
 				Inzertor, nezávislý vyledávač inzercí. A tak.
 			</div>
 		<% } %>
+		</main>
 	</body>
 </html>
 		
