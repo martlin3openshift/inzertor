@@ -225,7 +225,7 @@ main {
 /******************************************************************************/
 /* forms */ 
 
-.fieldset input,label {
+.fieldset input, .fieldset label {
 	padding: 0.5eM 2%;
 	margin: 0.2eM 4%;
 	min-width: 20%;
@@ -238,14 +238,14 @@ main {
 	clear: both;
 }
 
-.fieldset input[type=text],input[type=password] { 	/* TODO all types */
+.fieldset input[type=text], .fieldset input[type=password] { 	/* TODO all types */
 	padding: 0.5eM 2%;
 
 	border-radius: 4px;
 	border: 1px solid #935a71;
 }
 
-.fieldset input[type=submit],input[type=reset],input[type=button] {
+.fieldset input[type=submit], .fieldset input[type=reset], .fieldset input[type=button] {
 	padding: 0.5eM 2%;	
 	border: none;
 	color:         #fff;
