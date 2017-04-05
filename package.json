@@ -1,10 +1,10 @@
 {
   "name": "inzertor",
-  "version": "0.0.0",
+  "version": "0.0.3",
   "description": "Basic advertisements search engine",
   "main": "server.js",
   "scripts": {
-	  "start": "node server.js",
+	  "start": "npm install-all && node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -17,6 +17,10 @@
   	"url": "0.11.0",
 		"node-session": "1.2.1"
   },
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/martlin3openshift/inzertor/releases/tag/0.3"
+	},
   "author": "martlin",
   "license": "BSD-2-Clause"
 }
